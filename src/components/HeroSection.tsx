@@ -27,7 +27,11 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-          <Button size="lg" className="hero-button text-lg px-8 py-6">
+          <Button 
+            size="lg" 
+            className="hero-button text-lg px-8 py-6"
+            onClick={() => window.location.href = '/assessment'}
+          >
             Start Assessment
           </Button>
           <Button variant="outline" size="lg" className="text-lg px-8 py-6 border-primary/30 hover:bg-primary/10">
