@@ -2,41 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Security Architect Assessment Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors */
+    --background: 220 15% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 15% 8%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 15% 8%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Security Brand - Deep Blue to Cyan */
+    --primary: 200 100% 50%;
+    --primary-foreground: 220 15% 6%;
+    --primary-glow: 180 100% 60%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 200 100% 50%;
+    --accent-foreground: 220 15% 6%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 15%;
+    --input: 220 15% 12%;
+    --ring: 200 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom Design Tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(200 100% 50%), hsl(180 100% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(220 15% 8%), hsl(220 15% 12%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 15% 6%) 0%, hsl(220 15% 8%) 50%, hsl(200 100% 8%) 100%);
+    
+    --shadow-primary: 0 10px 40px hsl(200 100% 50% / 0.3);
+    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 40px hsl(200 100% 50% / 0.2);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +114,44 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .hero-button {
+    @apply bg-primary text-primary-foreground;
+    @apply shadow-[var(--shadow-primary)];
+    @apply transition-[var(--transition-smooth)];
+    @apply hover:shadow-[var(--shadow-glow)];
+    @apply hover:scale-105;
+    background: var(--gradient-primary);
+  }
+
+  .assessment-card {
+    @apply bg-card text-card-foreground;
+    @apply shadow-[var(--shadow-card)];
+    @apply border border-border/50;
+    @apply transition-[var(--transition-smooth)];
+    @apply hover:border-primary/50;
+    @apply hover:shadow-[var(--shadow-primary)];
+    backdrop-filter: blur(10px);
+  }
+
+  .glow-text {
+    @apply text-transparent bg-clip-text;
+    background: var(--gradient-primary);
+  }
+
+  .section-background {
+    @apply relative;
+    background: var(--gradient-secondary);
+  }
+
+  .section-background::before {
+    content: '';
+    @apply absolute inset-0 opacity-5;
+    background-image: radial-gradient(circle at 50% 50%, hsl(var(--primary)) 0%, transparent 50%);
   }
 }
